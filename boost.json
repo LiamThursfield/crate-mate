@@ -1,0 +1,14 @@
+{
+    "agents": [
+        "gemini",
+        "phpstorm"
+    ],
+    "editors": [
+        "gemini",
+        "phpstorm"
+    ],
+    "guidelines": [
+        "laravel/fortify"
+    ],
+    "sail": true
+}
