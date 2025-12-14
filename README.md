@@ -56,3 +56,54 @@ docker run --rm \
 # Install NPM dependencies using pnpm via Sail
 ./vendor/bin/sail npm install --global pnpm
 ./vendor/bin/sail pnpm install
+```
+
+### Environment Setup
+
+1. Copy the example environment file:
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Generate the application key:
+   ```bash
+   ./vendor/bin/sail artisan key:generate
+   ```
+
+3. Configure your database credentials in `.env` (ensure they match the `docker-compose.yml` services).
+
+4. Run migrations to set up the database structure:
+   ```bash
+   ./vendor/bin/sail artisan migrate
+   ```
+
+### Running the Application
+
+1. Start the Docker containers (database, queue, etc.):
+   ```bash
+   ./vendor/bin/sail up -d
+   ```
+
+2. Compile assets (run this every time your frontend code changes):
+   ```bash
+   ./vendor/bin/sail pnpm run dev
+   # Or, use 'pnpm run build' for production assets
+   ```
+
+3. The application will be accessible at **http://localhost**.
+
+## 🗺 Roadmap
+
+* **[PHASE 1]** Establish robust parsing for Rekordbox history and library files.
+* **[PHASE 2]** Implement functionality to 'merge' library tracks/artists to 'canonical' tracks/artists.
+* **[PHASE 3]** Develop the backend logic for calculating "The Annual Drop" statistics.
+* **[PHASE 4]** Implement the core track search, filter, and setlist creation view.
+* **[PHASE 5]** Introduce support for additional DJ software libraries (e.g., Serato, Traktor).
+
+## 🤝 Contributing
+
+We welcome contributions! Please check the CONTRIBUTING.md file for guidelines on how to submit pull requests, report bugs, and suggest features.
+
+## 📝 License
+
+This project is licensed under the MIT License - see the LICENSE.md file for details.
