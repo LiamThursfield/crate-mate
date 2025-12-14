@@ -40,7 +40,7 @@ const user = page.props.auth.user;
             <div class="flex flex-col space-y-6">
                 <HeadingSmall
                     title="Profile information"
-                    description="Update your name and email address"
+                    description="Update your details"
                 />
 
                 <Form
@@ -60,6 +60,20 @@ const user = page.props.auth.user;
                             placeholder="Full name"
                         />
                         <InputError class="mt-2" :message="errors.name" />
+                    </div>
+
+                    <div class="grid gap-2">
+                        <Label for="name">DJ Name</Label>
+                        <Input
+                            id="dj_name"
+                            class="mt-1 block w-full"
+                            name="dj_name"
+                            :default-value="user.dj_name"
+                            required
+                            autocomplete="dj_name"
+                            placeholder="DJ name"
+                        />
+                        <InputError class="mt-2" :message="errors.dj_name" />
                     </div>
 
                     <div class="grid gap-2">
