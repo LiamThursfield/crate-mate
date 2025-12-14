@@ -96,9 +96,9 @@ docker run --rm \
 
 * **[PHASE 1]** Establish robust parsing for Rekordbox history and library files.
 * **[PHASE 2]** Implement functionality to 'merge' library tracks/artists to 'canonical' tracks/artists.
-* **[PHASE 3]** Develop the backend logic for calculating "The Annual Drop" statistics.
+* **[PHASE 3]** Develop the backend logic for calculating the "Booth Breakdown" statistics.
 * **[PHASE 4]** Implement the core track search, filter, and setlist creation view.
-* **[PHASE 5]** Introduce support for additional DJ software libraries (e.g., Serato, Traktor).
+* **[PHASE 5]** Introduce support for additional DJ software libraries (e.g. Serato, Traktor).
 
 ## 🤝 Contributing
 
