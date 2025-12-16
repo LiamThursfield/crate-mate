@@ -15,15 +15,19 @@ defineProps<Props>();
 <template>
     <svg
         xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 40 42"
+        viewBox="0 0 200 200"
+
         :class="className"
         v-bind="$attrs"
     >
-        <path
-            fill="currentColor"
-            fill-rule="evenodd"
-            clip-rule="evenodd"
-            d="M17.2 5.633 8.6.855 0 5.633v26.51l16.2 9 16.2-9v-8.442l7.6-4.223V9.856l-8.6-4.777-8.6 4.777V18.3l-5.6 3.111V5.633ZM38 18.301l-5.6 3.11v-6.157l5.6-3.11V18.3Zm-1.06-7.856-5.54 3.078-5.54-3.079 5.54-3.078 5.54 3.079ZM24.8 18.3v-6.157l5.6 3.111v6.158L24.8 18.3Zm-1 1.732 5.54 3.078-13.14 7.302-5.54-3.078 13.14-7.3v-.002Zm-16.2 7.89 7.6 4.222V38.3L2 30.966V7.92l5.6 3.111v16.892ZM8.6 9.3 3.06 6.222 8.6 3.143l5.54 3.08L8.6 9.3Zm21.8 15.51-13.2 7.334V38.3l13.2-7.334v-6.156ZM9.6 11.034l5.6-3.11v14.6l-5.6 3.11v-14.6Z"
-        />
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M196 0C198.209 0 200 1.79086 200 4V180C200 191.046 191.046 200 180 200H20C8.95431 200 1.61075e-07 191.046 0 180V4C0 1.79086 1.79086 0 4 0H196ZM8 8V180C8 186.627 13.3726 192 20 192H180C186.627 192 192 186.627 192 180V8H8Z" fill="currentColor"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M130 24C142.15 24 152 33.8497 152 46C152 58.1503 142.15 68 130 68H70C57.8497 68 48 58.1503 48 46C48 33.8497 57.8497 24 70 24H130ZM70 32C62.268 32 56 38.268 56 46C56 53.732 62.268 60 70 60H130C137.732 60 144 53.732 144 46C144 38.268 137.732 32 130 32H70Z" fill="currentColor"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M172 86C174.209 86 176 87.7909 176 90V172C176 174.209 174.209 176 172 176H28C25.7909 176 24 174.209 24 172V90C24 87.7909 25.7909 86 28 86H172ZM32 94V168H168V94H32Z" fill="currentColor"/>
+        <rect x="43" y="132" width="12" height="27" rx="3" fill="currentColor"/>
+        <rect x="63" y="120" width="12" height="39" rx="3" fill="currentColor"/>
+        <rect x="83" y="104" width="12" height="55" rx="3" fill="currentColor"/>
+        <rect x="103" y="111" width="12" height="48" rx="3" fill="currentColor"/>
+        <rect x="123" y="116" width="12" height="43" rx="3" fill="currentColor"/>
+        <rect x="143" y="125" width="12" height="34" rx="3" fill="currentColor"/>
     </svg>
 </template>
