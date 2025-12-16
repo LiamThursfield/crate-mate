@@ -42,9 +42,9 @@ class LibraryArtist extends Model
         return $this->hasOne(User::class, 'id', 'user_id');
     }
 
-    public function canonicalArtist(): BelongsTo
+    public function canonicalArtist(): HasOne
     {
-        return $this->belongsTo(CanonicalArtist::class, 'id', 'canonical_artist_id');
+        return $this->hasOne(CanonicalArtist::class, 'id', 'canonical_artist_id');
     }
 
     public function libraryTracks(): HasMany

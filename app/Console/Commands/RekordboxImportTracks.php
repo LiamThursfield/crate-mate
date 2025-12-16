@@ -59,6 +59,9 @@ class RekordboxImportTracks extends Command
                     ->get()
                     ->keyBy('source_artist_id');
 
+                // Load these separately due to the different database connection
+                $libraryArtists->load('canonicalArtist');
+
                 $trackCollection
                     ->filter(function (RekordboxTrack $rekordboxTrack) use ($libraryArtists) {
                         // Skip any tracks with an empty title
@@ -69,14 +72,25 @@ class RekordboxImportTracks extends Command
                             return false;
                         }
 
+                        /** @var LibraryArtist $libraryArtist */
                         $libraryArtist = $libraryArtists->get($rekordboxTrack->ArtistID);
 
-                        // Skip any tracks that we have yet to import the artist for
-                        if ($rekordboxTrack->ArtistID !== null && $libraryArtist === null) {
-                            $this->warn("Skipping track: $title ($rekordboxTrack->ID) as libraryArtist artist with ID $rekordboxTrack->ArtistID doesn't exist");
+                        // Skip any tracks that have an artist and we have yet to import the artist for
+                        if ($rekordboxTrack->ArtistID !== null) {
+                            if ($libraryArtist === null) {
+                                $this->warn("Skipping track: $title ($rekordboxTrack->ID) as libraryArtist artist with Rekordbox ID $rekordboxTrack->ArtistID doesn't exist");
 
-                            return false;
+                                return false;
+                            }
+
+                            $canonicalArtist = $libraryArtist->canonicalArtist;
+                            if ($canonicalArtist === null) {
+                                $this->warn("Skipping track: $title ($rekordboxTrack->ID) as libraryArtist artist with ID $libraryArtist->id doesn't have a canonical artist set");
+
+                                return false;
+                            }
                         }
+
 
                         return true;
                     })->each(function (RekordboxTrack $rekordboxTrack) use (&$newTrackCount, $libraryArtists) {
@@ -84,23 +98,27 @@ class RekordboxImportTracks extends Command
 
                         /** @var ?LibraryArtist $libraryArtist */
                         $libraryArtist = $libraryArtists->get($rekordboxTrack->ArtistID);
+                        $canonicalArtist = $libraryArtist?->canonicalArtist ?? null;
 
                         $this->info("Creating Track: $title ($rekordboxTrack->ID) with Artist ID $rekordboxTrack->ArtistID", OutputInterface::VERBOSITY_VERBOSE);
 
                         $baseData = [
                             'title' => $title,
-                            'library_artist_id' => $libraryArtist->id ?? null,
                             'bpm' => $rekordboxTrack->BPM / 100,
                             'duration' => $rekordboxTrack->Length,
                             'key' => $rekordboxTrack->rekordboxKey?->ScaleName,
                             'user_id' => $this->user->getKey(),
                         ];
 
-                        $canonicalTrack = CanonicalTrack::query()->create($baseData);
+                        $canonicalTrack = CanonicalTrack::query()->create([
+                            ...$baseData,
+                            'canonical_artist_id' => $canonicalArtist?->id ?? null,
+                        ]);
 
                         LibraryTrack::query()->create([
                             ...$baseData,
                             'canonical_track_id' => $canonicalTrack->id,
+                            'library_artist_id' => $libraryArtist->id ?? null,
                             'source' => LibrarySource::REKORDBOX,
                             'source_track_id' => $rekordboxTrack->ID,
                         ]);

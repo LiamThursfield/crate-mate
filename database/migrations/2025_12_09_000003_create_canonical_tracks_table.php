@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedSmallInteger('duration');
             $table->string('key', 5)->nullable();
 
-            $table->foreignId('library_artist_id')->nullable()->constrained();
+            $table->foreignId('canonical_artist_id')->nullable()->constrained();
 
             $table->foreignId('user_id')->constrained();
 
