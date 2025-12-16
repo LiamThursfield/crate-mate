@@ -18,14 +18,13 @@ return new class extends Migration
 
             $table->string('name', 255);
 
-            $table->foreignId('user_id')->constrained();
-            $table->string('source', 15);
+            $table->foreignId('library_id')->constrained();
             $table->string('source_artist_id', 255);
 
             $table->timestamps();
 
-            // Ensure that each user can only have a single record for the given source / artist id
-            $table->unique(['user_id', 'source', 'source_artist_id']);
+            // Ensure that each library can only have a single record for the given source artist id
+            $table->unique(['library_id', 'source_artist_id']);
         });
     }
 

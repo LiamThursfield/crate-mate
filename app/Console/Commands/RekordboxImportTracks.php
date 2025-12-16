@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Enums\LibrarySource;
 use App\Models\CanonicalTrack;
+use App\Models\Library;
 use App\Models\LibraryArtist;
 use App\Models\LibraryTrack;
 use App\Models\Rekordbox\RekordboxTrack;
@@ -20,7 +21,7 @@ class RekordboxImportTracks extends Command
      *
      * @var string
      */
-    protected $signature = 'rekordbox:import-tracks {user}}';
+    protected $signature = 'rekordbox:import-tracks {library}';
 
     /**
      * The console command description.
@@ -29,6 +30,7 @@ class RekordboxImportTracks extends Command
      */
     protected $description = 'Imports the tracks from the rekordbox database';
 
+    protected Library $library;
     protected User $user;
 
     /**
@@ -36,12 +38,18 @@ class RekordboxImportTracks extends Command
      */
     public function handle(): int
     {
-        $this->user = User::query()->findOrFail($this->argument('user'));
-        $this->info("Importing Tracks for User: {$this->user->email}");
-
-        $existingTracks = $this->user->libraryTracks()
-            ->select('source_track_id')
+        // Ensure a Rekordbox Library exists with the given ID
+        $this->library = Library::query()
+            ->where('id', $this->argument('library'))
             ->where('source', LibrarySource::REKORDBOX)
+            ->firstOrFail();
+
+        $this->user = $this->library->user;
+
+        $this->info("Importing Tracks for Library: {$this->library->name} belonging to user: {$this->user->email}");
+
+        $existingSourceTrackIds = $this->library->tracks()
+            ->select('source_track_id')
             ->pluck('source_track_id');
 
         $newTrackCount = 0;
@@ -50,11 +58,10 @@ class RekordboxImportTracks extends Command
             ->with('rekordboxKey')
             ->whereNotIn(
                 'ID',
-                $existingTracks
+                $existingSourceTrackIds
             )->chunk(500, function (Collection $trackCollection) use (&$newTrackCount) {
                 /** @var Collection<LibraryTrack> $libraryArtists */
-                $libraryArtists = $this->user->libraryArtists()
-                    ->where('source', LibrarySource::REKORDBOX)
+                $libraryArtists = $this->library->artists()
                     ->whereIn('source_artist_id', $trackCollection->pluck('ArtistID'))
                     ->get()
                     ->keyBy('source_artist_id');
@@ -100,26 +107,26 @@ class RekordboxImportTracks extends Command
                         $libraryArtist = $libraryArtists->get($rekordboxTrack->ArtistID);
                         $canonicalArtist = $libraryArtist?->canonicalArtist ?? null;
 
-                        $this->info("Creating Track: $title ($rekordboxTrack->ID) with Artist ID $rekordboxTrack->ArtistID", OutputInterface::VERBOSITY_VERBOSE);
+                        $this->info("Creating Track: $title ($rekordboxTrack->ID) with Artist ID $rekordboxTrack->ArtistID ($libraryArtist?->id)", OutputInterface::VERBOSITY_VERBOSE);
 
                         $baseData = [
                             'title' => $title,
                             'bpm' => $rekordboxTrack->BPM / 100,
                             'duration' => $rekordboxTrack->Length,
                             'key' => $rekordboxTrack->rekordboxKey?->ScaleName,
-                            'user_id' => $this->user->getKey(),
                         ];
 
                         $canonicalTrack = CanonicalTrack::query()->create([
                             ...$baseData,
                             'canonical_artist_id' => $canonicalArtist?->id ?? null,
+                            'user_id' => $this->user->getKey(),
                         ]);
 
                         LibraryTrack::query()->create([
                             ...$baseData,
                             'canonical_track_id' => $canonicalTrack->id,
                             'library_artist_id' => $libraryArtist->id ?? null,
-                            'source' => LibrarySource::REKORDBOX,
+                            'library_id' => $this->library->getKey(),
                             'source_track_id' => $rekordboxTrack->ID,
                         ]);
 

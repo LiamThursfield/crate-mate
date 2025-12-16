@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Enums\LibrarySource;
 use App\Models\CanonicalArtist;
+use App\Models\Library;
 use App\Models\LibraryArtist;
 use App\Models\Rekordbox\RekordboxArtist;
 use App\Models\User;
@@ -19,7 +20,7 @@ class RekordboxImportArtists extends Command
      *
      * @var string
      */
-    protected $signature = 'rekordbox:import-artists {user}';
+    protected $signature = 'rekordbox:import-artists {library}';
 
     /**
      * The console command description.
@@ -28,6 +29,7 @@ class RekordboxImportArtists extends Command
      */
     protected $description = 'Imports the artists from the rekordbox database';
 
+    protected Library $library;
     protected User $user;
 
     /**
@@ -35,19 +37,25 @@ class RekordboxImportArtists extends Command
      */
     public function handle(): int
     {
-        $this->user = User::query()->findOrFail($this->argument('user'));
-        $this->info("Importing Artists for User: {$this->user->email}");
-
-        $existingArtists = $this->user->libraryArtists()
-            ->select('source_artist_id')
+        // Ensure a Rekordbox Library exists with the given ID
+        $this->library = Library::query()
+            ->where('id', $this->argument('library'))
             ->where('source', LibrarySource::REKORDBOX)
+            ->firstOrFail();
+
+        $this->user = $this->library->user;
+
+        $this->info("Importing Artists for Library: {$this->library->name} belonging to user: {$this->user->email}");
+
+        $existingSourceArtistIds = $this->library->artists()
+            ->select('source_artist_id')
             ->pluck('source_artist_id');
 
         $newArtistsCount = 0;
 
         RekordboxArtist::query()->whereNotIn(
             'ID',
-            $existingArtists
+            $existingSourceArtistIds
         )->chunk(500, function (Collection $artistCollection) use (&$newArtistsCount) {
             $artistCollection->each(function (RekordboxArtist $rekordboxArtist) use (&$newArtistsCount) {
                 $name = Str::trim($rekordboxArtist->Name);
@@ -62,8 +70,7 @@ class RekordboxImportArtists extends Command
                 LibraryArtist::query()->create([
                     'name' => $name,
                     'canonical_artist_id' => $canonicalArtist->id,
-                    'user_id' => $this->user->getKey(),
-                    'source' => LibrarySource::REKORDBOX,
+                    'library_id' => $this->user->getKey(),
                     'source_artist_id' => $rekordboxArtist->ID,
                 ]);
 

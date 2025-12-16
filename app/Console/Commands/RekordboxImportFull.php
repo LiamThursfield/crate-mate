@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Enums\LibrarySource;
+use App\Models\Library;
 use App\Models\User;
 use Illuminate\Console\Command;
 
@@ -12,7 +14,7 @@ class RekordboxImportFull extends Command
      *
      * @var string
      */
-    protected $signature = 'rekordbox:import-full {user}';
+    protected $signature = 'rekordbox:import-full {library}';
 
     /**
      * The console command description.
@@ -26,19 +28,22 @@ class RekordboxImportFull extends Command
      */
     public function handle(): int
     {
-        // Ensure the user exists
-        User::query()->findOrFail($this->argument('user'));
+        // Ensure a Rekordbox Library exists with the given ID
+        Library::query()
+            ->where('id', $this->argument('library'))
+            ->where('source', LibrarySource::REKORDBOX)
+            ->firstOrFail();
 
         $this->info('Importing Artists');
         $this->call('rekordbox:import-artists', [
-            'user' => $this->argument('user'),
+            'library' => $this->argument('library'),
         ]);
 
         $this->line('');
 
         $this->info('Importing Tracks');
         $this->call('rekordbox:import-tracks', [
-            'user' => $this->argument('user'),
+            'library' => $this->argument('library'),
         ]);
 
         return self::SUCCESS;

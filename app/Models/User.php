@@ -4,31 +4,41 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Carbon\Carbon;
+use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Collection;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 
 /**
  * @property-read int $id
+ *
  * @property string $name
  * @property string $dj_name
  * @property string $email
  * @property ?Carbon $email_verified_at
  * @property string $password
  * @property ?string $remember_token
+ *
  * @property ?string $two_factor_secret
  * @property ?string $two_factor_recovery_codes
  * @property ?Carbon $two_factor_confirmed_at
+ *
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ *
+ * @property-read Collection<Library> $libraries
+ *
  * @property ?Carbon $deleted_at
+ *
+ *
  */
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
+    /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable, SoftDeletes, TwoFactorAuthenticatable;
 
     /**
@@ -69,13 +79,8 @@ class User extends Authenticatable
         ];
     }
 
-    public function libraryArtists(): HasMany
+    public function libraries(): HasMany
     {
-        return $this->hasMany(LibraryArtist::class);
-    }
-
-    public function libraryTracks(): HasMany
-    {
-        return $this->hasMany(LibraryTrack::class);
+        return $this->hasMany(Library::class);
     }
 }
