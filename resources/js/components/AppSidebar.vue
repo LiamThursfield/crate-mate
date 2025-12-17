@@ -1,50 +1,128 @@
-<script setup lang="ts">
-import NavFooter from '@/components/NavFooter.vue';
-import NavMain from '@/components/NavMain.vue';
+<script lang="ts" setup>
+import type { SidebarProps } from '@/components/ui/sidebar';
+
 import NavUser from '@/components/NavUser.vue';
 import {
+    BookOpen,
+    Bot,
+    Settings2,
+    SquareTerminal,
+} from 'lucide-vue-next';
+
+import {
     Sidebar,
+    SidebarCollapsibleMenuGroup,
     SidebarContent,
     SidebarFooter,
     SidebarHeader,
+    SidebarRail,
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
-import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 
-const mainNavItems: NavItem[] = [
-    {
-        title: 'Dashboard',
-        href: dashboard(),
-        icon: LayoutGrid,
-    },
-];
+const props = withDefaults(defineProps<SidebarProps>(), {
+    collapsible: 'icon',
+});
 
-const footerNavItems: NavItem[] = [
-    {
-        title: 'Github Repo',
-        href: 'https://github.com/LiamThursfield/crate-mate',
-        icon: Folder,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://github.com/LiamThursfield/crate-mate#readme',
-        icon: BookOpen,
-    },
-];
+const platformMenuItems = [
+        {
+            title: 'Playground',
+            url: '#',
+            icon: SquareTerminal,
+            isActive: true,
+            items: [
+                {
+                    title: 'History',
+                    url: '#',
+                },
+                {
+                    title: 'Starred',
+                    url: '#',
+                },
+                {
+                    title: 'Settings',
+                    url: '#',
+                },
+            ],
+        },
+        {
+            title: 'Models',
+            url: '#',
+            icon: Bot,
+            items: [
+                {
+                    title: 'Genesis',
+                    url: '#',
+                },
+                {
+                    title: 'Explorer',
+                    url: '#',
+                },
+                {
+                    title: 'Quantum',
+                    url: '#',
+                },
+            ],
+        },
+        {
+            title: 'Documentation',
+            url: '#',
+            icon: BookOpen,
+            items: [
+                {
+                    title: 'Introduction',
+                    url: '#',
+                },
+                {
+                    title: 'Get Started',
+                    url: '#',
+                },
+                {
+                    title: 'Tutorials',
+                    url: '#',
+                },
+                {
+                    title: 'Changelog',
+                    url: '#',
+                },
+            ],
+        },
+        {
+            title: 'Settings',
+            url: '#',
+            icon: Settings2,
+            items: [
+                {
+                    title: 'General',
+                    url: '#',
+                },
+                {
+                    title: 'Team',
+                    url: '#',
+                },
+                {
+                    title: 'Billing',
+                    url: '#',
+                },
+                {
+                    title: 'Limits',
+                    url: '#',
+                },
+            ],
+        },
+    ];
 </script>
 
 <template>
-    <Sidebar collapsible="icon" variant="inset">
+    <Sidebar v-bind="props">
         <SidebarHeader>
             <SidebarMenu>
                 <SidebarMenuItem>
-                    <SidebarMenuButton size="lg" as-child>
+                    <SidebarMenuButton as-child size="lg">
                         <Link :href="dashboard()">
                             <AppLogo />
                         </Link>
@@ -52,15 +130,15 @@ const footerNavItems: NavItem[] = [
                 </SidebarMenuItem>
             </SidebarMenu>
         </SidebarHeader>
-
         <SidebarContent>
-            <NavMain :items="mainNavItems" />
+            <SidebarCollapsibleMenuGroup
+                :items="platformMenuItems"
+                label="Platform"
+            />
         </SidebarContent>
-
         <SidebarFooter>
-            <NavFooter :items="footerNavItems" />
             <NavUser />
         </SidebarFooter>
+        <SidebarRail />
     </Sidebar>
-    <slot />
 </template>
