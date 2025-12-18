@@ -1,50 +1,75 @@
-<script setup lang="ts">
-import NavFooter from '@/components/NavFooter.vue';
-import NavMain from '@/components/NavMain.vue';
+<script lang="ts" setup>
+import type { SidebarProps } from '@/components/ui/sidebar';
+
 import NavUser from '@/components/NavUser.vue';
+
 import {
     Sidebar,
+    SidebarCollapsibleMenuGroup,
     SidebarContent,
     SidebarFooter,
     SidebarHeader,
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
+    SidebarRail,
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
-import { type NavItem } from '@/types';
+import { SidebarMenuItemSection } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 
-const mainNavItems: NavItem[] = [
-    {
-        title: 'Dashboard',
-        href: dashboard(),
-        icon: LayoutGrid,
-    },
-];
+const props = withDefaults(defineProps<SidebarProps>(), {
+    collapsible: 'icon',
+});
 
-const footerNavItems: NavItem[] = [
+const platformMenuItemSections: SidebarMenuItemSection[] = [
     {
-        title: 'Github Repo',
-        href: 'https://github.com/LiamThursfield/crate-mate',
-        icon: Folder,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://github.com/LiamThursfield/crate-mate#readme',
-        icon: BookOpen,
+        label: 'Libraries',
+        items: [
+            {
+                title: 'My Library',
+                icon: 'Library',
+                items: [
+                    {
+                        title: 'Tracks',
+                        url: '/dashboard',
+                    },
+                    {
+                        title: 'Artists',
+                        url: '/dashboard',
+                    },
+                    {
+                        title: 'Set Histories',
+                        url: '/dashboard',
+                    },
+                ],
+            },
+            {
+                title: 'Master Library',
+                icon: 'Crown',
+                items: [
+                    {
+                        title: 'Tracks',
+                        url: '/dashboard',
+                    },
+                    {
+                        title: 'Artists',
+                        url: '/dashboard',
+                    },
+                ],
+            },
+        ],
     },
 ];
 </script>
 
 <template>
-    <Sidebar collapsible="icon" variant="inset">
+    <Sidebar v-bind="props">
         <SidebarHeader>
             <SidebarMenu>
                 <SidebarMenuItem>
-                    <SidebarMenuButton size="lg" as-child>
+                    <SidebarMenuButton as-child size="lg">
                         <Link :href="dashboard()">
                             <AppLogo />
                         </Link>
@@ -52,15 +77,17 @@ const footerNavItems: NavItem[] = [
                 </SidebarMenuItem>
             </SidebarMenu>
         </SidebarHeader>
-
         <SidebarContent>
-            <NavMain :items="mainNavItems" />
+            <SidebarCollapsibleMenuGroup
+                v-for="(menuItemSection, index) in platformMenuItemSections"
+                :key="`${index}-${menuItemSection.label}`"
+                :items="menuItemSection.items"
+                :label="menuItemSection.label"
+            />
         </SidebarContent>
-
         <SidebarFooter>
-            <NavFooter :items="footerNavItems" />
             <NavUser />
         </SidebarFooter>
+        <SidebarRail />
     </Sidebar>
-    <slot />
 </template>

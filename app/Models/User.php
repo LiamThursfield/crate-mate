@@ -15,26 +15,19 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 
 /**
  * @property-read int $id
- *
  * @property string $name
  * @property string $dj_name
  * @property string $email
  * @property ?Carbon $email_verified_at
  * @property string $password
  * @property ?string $remember_token
- *
  * @property ?string $two_factor_secret
  * @property ?string $two_factor_recovery_codes
  * @property ?Carbon $two_factor_confirmed_at
- *
  * @property Carbon $created_at
  * @property Carbon $updated_at
- *
  * @property-read Collection<Library> $libraries
- *
  * @property ?Carbon $deleted_at
- *
- *
  */
 class User extends Authenticatable
 {

@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @property-read int $id
- *
  * @property int $canonical_track_id
  * @property string $title
  * @property float $bpm
@@ -18,13 +17,10 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property string $key
  * @property ?int $library_artist_id
  * @property int $user_id
- *
  * @property LibrarySource $source
  * @property string $source_track_id
- *
  * @property-read Carbon $created_at
  * @property-read Carbon $updated_at
- *
  * @property-read Library $library
  * @property-read ?LibraryArtist $libraryArtist
  */
@@ -45,7 +41,6 @@ class LibraryTrack extends Model
     {
         return $this->hasOne(Library::class);
     }
-
 
     public function libraryArtist(): BelongsTo
     {

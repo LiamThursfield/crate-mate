@@ -2,25 +2,20 @@
 
 namespace App\Models;
 
-use App\Enums\LibrarySource;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Collection;
 
 /**
  * @property-read int $id
- *
  * @property int $canonical_artist_id
  * @property string $name
  * @property int $library_id
  * @property string $source_artist_id
- *
  * @property-read Carbon $created_at
  * @property-read Carbon $updated_at
- *
  * @property-read CanonicalArtist $canonicalArtist
  * @property-read Library $library
  * @property-read Collection<LibraryTrack> $libraryTracks

@@ -17,11 +17,9 @@ use Illuminate\Support\Collection;
  * @property string $name
  * @property LibrarySource $source
  * @property int $user_id
- *
  * @property Carbon $deleted_at
  * @property-read Carbon $created_at
  * @property-read Carbon $updated_at
- *
  * @property-read User $user
  * @property-read Collection<LibraryArtist> $artists
  * @property-read Collection<LibraryTrack> $tracks
@@ -46,7 +44,7 @@ class Library extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function  artists(): HasMany
+    public function artists(): HasMany
     {
         return $this->hasMany(LibraryArtist::class);
     }
