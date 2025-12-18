@@ -30,6 +30,7 @@ class RekordboxImportArtists extends Command
     protected $description = 'Imports the artists from the rekordbox database';
 
     protected Library $library;
+
     protected User $user;
 
     /**

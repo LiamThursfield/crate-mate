@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
         Library::factory()->create([
             'name' => 'Test Library',
             'user_id' => $user->id,
-            'source' => LibrarySource::REKORDBOX
+            'source' => LibrarySource::REKORDBOX,
         ]);
     }
 }
