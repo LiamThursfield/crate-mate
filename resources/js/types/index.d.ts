@@ -19,7 +19,7 @@ export interface NavItem {
 
 export interface SidebarMenuItem {
     title: string;
-    url: string;
+    url?: string;
     icon?: string;
     isActive?: boolean;
     items?: SidebarMenuItem[];

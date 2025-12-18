@@ -25,36 +25,36 @@ const props = withDefaults(defineProps<SidebarProps>(), {
 
 const platformMenuItemSections: SidebarMenuItemSection[] = [
     {
-        label: 'Library',
+        label: 'Libraries',
         items: [
             {
-                title: 'Tracks',
-                icon: "SquareIcon",
-                isActive: true,
-                url: '#',
+                title: 'My Library',
+                icon: 'Library',
                 items: [
                     {
-                        isActive: true,
-                        title: 'One',
-                        url: '#',
+                        title: 'Tracks',
+                        url: '/dashboard',
                     },
                     {
-                        title: 'Two',
-                        url: '#',
+                        title: 'Artists',
+                        url: '/dashboard',
                     },
                     {
-                        title: 'Three',
-                        url: '#',
+                        title: 'Set Histories',
+                        url: '/dashboard',
                     },
                 ],
             },
             {
-                title: 'Artists',
-                url: '#',
-                icon: "CircleIcon",
+                title: 'Master Library',
+                icon: 'Crown',
                 items: [
                     {
-                        title: 'Two',
+                        title: 'Tracks',
+                        url: '/dashboard',
+                    },
+                    {
+                        title: 'Artists',
                         url: '/dashboard',
                     },
                 ],
@@ -62,7 +62,6 @@ const platformMenuItemSections: SidebarMenuItemSection[] = [
         ],
     },
 ];
-
 </script>
 
 <template>
