@@ -17,6 +17,19 @@ export interface NavItem {
     isActive?: boolean;
 }
 
+export interface SidebarMenuItem {
+    title: string;
+    url: string;
+    icon?: string;
+    isActive?: boolean;
+    items?: SidebarMenuItem[];
+}
+
+export interface SidebarMenuItemSection {
+    label: string;
+    items: SidebarMenuItem[];
+}
+
 export type AppPageProps<
     T extends Record<string, unknown> = Record<string, unknown>,
 > = T & {
@@ -29,7 +42,6 @@ export type AppPageProps<
 export interface User {
     id: number;
     name: string;
-    dj_name: string;
     email: string;
     avatar?: string;
     email_verified_at: string | null;

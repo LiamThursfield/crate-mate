@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import type { LucideIcon } from "lucide-vue-next"
-import { ChevronRight } from "lucide-vue-next"
+import * as LucideIcons from "lucide-vue-next"
 import {
     Collapsible,
     CollapsibleContent,
@@ -16,20 +15,26 @@ import {
     SidebarMenuSubButton,
     SidebarMenuSubItem,
 } from '@/components/ui/sidebar/index'
+import { SidebarMenuItem as SidebarMenuItemType } from '@/types';
+import { Link } from '@inertiajs/vue3';
 
 defineProps<{
     label: string,
-    items: {
-        title: string
-        url: string
-        icon?: LucideIcon
-        isActive?: boolean
-        items?: {
-            title: string
-            url: string
-        }[]
-    }[]
-}>()
+    items: SidebarMenuItemType[]
+}>();
+
+/**
+ * This function takes the string name and returns the component.
+ * If the string doesn't match a Lucide icon, it falls back to AppWindow.
+ */
+const getIcon = (name: string | undefined) => {
+    if (name == null) {
+        return LucideIcons.AppWindow;
+    }
+
+    return (LucideIcons as any)[name] || LucideIcons.AppWindow;
+};
+
 </script>
 
 <template>
@@ -48,19 +53,31 @@ defineProps<{
             >
                 <SidebarMenuItem>
                     <CollapsibleTrigger as-child>
-                        <SidebarMenuButton :tooltip="item.title">
-                            <component :is="item.icon" v-if="item.icon" />
-                            <span>{{ item.title }}</span>
-                            <ChevronRight class="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                        <SidebarMenuButton
+                            :class="{'font-black': item.isActive}"
+                            :tooltip="item.title"
+                        >
+                            <component :is="getIcon(item.icon)"/>
+                            <span
+                                class="max-w-full text-ellipsis overflow-hidden whitespace-nowrap"
+                                :aria-label="item.title"
+                            >
+                                {{ item.title }}
+                            </span>
+                            <LucideIcons.ChevronRight class="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
                         </SidebarMenuButton>
                     </CollapsibleTrigger>
+
                     <CollapsibleContent>
                         <SidebarMenuSub>
                             <SidebarMenuSubItem v-for="subItem in item.items" :key="subItem.title">
                                 <SidebarMenuSubButton as-child>
-                                    <a :href="subItem.url">
-                                        <span>{{ subItem.title }}</span>
-                                    </a>
+                                    <Link
+                                        :class="{'font-black': subItem.isActive}"
+                                        :href="subItem.url"
+                                    >
+                                        {{ subItem.title }}
+                                    </Link>
                                 </SidebarMenuSubButton>
                             </SidebarMenuSubItem>
                         </SidebarMenuSub>

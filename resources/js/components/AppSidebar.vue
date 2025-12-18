@@ -2,12 +2,6 @@
 import type { SidebarProps } from '@/components/ui/sidebar';
 
 import NavUser from '@/components/NavUser.vue';
-import {
-    BookOpen,
-    Bot,
-    Settings2,
-    SquareTerminal,
-} from 'lucide-vue-next';
 
 import {
     Sidebar,
@@ -15,12 +9,13 @@ import {
     SidebarContent,
     SidebarFooter,
     SidebarHeader,
-    SidebarRail,
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
+    SidebarRail,
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
+import { SidebarMenuItemSection } from '@/types';
 import { Link } from '@inertiajs/vue3';
 import AppLogo from './AppLogo.vue';
 
@@ -28,93 +23,46 @@ const props = withDefaults(defineProps<SidebarProps>(), {
     collapsible: 'icon',
 });
 
-const platformMenuItems = [
-        {
-            title: 'Playground',
-            url: '#',
-            icon: SquareTerminal,
-            isActive: true,
-            items: [
-                {
-                    title: 'History',
-                    url: '#',
-                },
-                {
-                    title: 'Starred',
-                    url: '#',
-                },
-                {
-                    title: 'Settings',
-                    url: '#',
-                },
-            ],
-        },
-        {
-            title: 'Models',
-            url: '#',
-            icon: Bot,
-            items: [
-                {
-                    title: 'Genesis',
-                    url: '#',
-                },
-                {
-                    title: 'Explorer',
-                    url: '#',
-                },
-                {
-                    title: 'Quantum',
-                    url: '#',
-                },
-            ],
-        },
-        {
-            title: 'Documentation',
-            url: '#',
-            icon: BookOpen,
-            items: [
-                {
-                    title: 'Introduction',
-                    url: '#',
-                },
-                {
-                    title: 'Get Started',
-                    url: '#',
-                },
-                {
-                    title: 'Tutorials',
-                    url: '#',
-                },
-                {
-                    title: 'Changelog',
-                    url: '#',
-                },
-            ],
-        },
-        {
-            title: 'Settings',
-            url: '#',
-            icon: Settings2,
-            items: [
-                {
-                    title: 'General',
-                    url: '#',
-                },
-                {
-                    title: 'Team',
-                    url: '#',
-                },
-                {
-                    title: 'Billing',
-                    url: '#',
-                },
-                {
-                    title: 'Limits',
-                    url: '#',
-                },
-            ],
-        },
-    ];
+const platformMenuItemSections: SidebarMenuItemSection[] = [
+    {
+        label: 'Library',
+        items: [
+            {
+                title: 'Tracks',
+                icon: "SquareIcon",
+                isActive: true,
+                url: '#',
+                items: [
+                    {
+                        isActive: true,
+                        title: 'One',
+                        url: '#',
+                    },
+                    {
+                        title: 'Two',
+                        url: '#',
+                    },
+                    {
+                        title: 'Three',
+                        url: '#',
+                    },
+                ],
+            },
+            {
+                title: 'Artists',
+                url: '#',
+                icon: "CircleIcon",
+                items: [
+                    {
+                        title: 'Two',
+                        url: '/dashboard',
+                    },
+                ],
+            },
+        ],
+    },
+];
+
 </script>
 
 <template>
@@ -132,8 +80,10 @@ const platformMenuItems = [
         </SidebarHeader>
         <SidebarContent>
             <SidebarCollapsibleMenuGroup
-                :items="platformMenuItems"
-                label="Platform"
+                v-for="(menuItemSection, index) in platformMenuItemSections"
+                :key="`${index}-${menuItemSection.label}`"
+                :items="menuItemSection.items"
+                :label="menuItemSection.label"
             />
         </SidebarContent>
         <SidebarFooter>
