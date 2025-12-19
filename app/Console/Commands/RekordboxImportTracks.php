@@ -10,7 +10,8 @@ use App\Models\LibraryTrack;
 use App\Models\Rekordbox\RekordboxTrack;
 use App\Models\User;
 use Illuminate\Console\Command;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Collection as DatabaseCollection;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -61,7 +62,9 @@ class RekordboxImportTracks extends Command
                 'ID',
                 $existingSourceTrackIds
             )->chunk(500, function (Collection $trackCollection) use (&$newTrackCount) {
-                /** @var Collection<LibraryTrack> $libraryArtists */
+                /** @var Collection<RekordboxTrack> $trackCollection */
+
+                /** @var DatabaseCollection<LibraryArtist> $libraryArtists */
                 $libraryArtists = $this->library->artists()
                     ->whereIn('source_artist_id', $trackCollection->pluck('ArtistID'))
                     ->get()

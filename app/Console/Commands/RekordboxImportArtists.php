@@ -71,7 +71,7 @@ class RekordboxImportArtists extends Command
                 LibraryArtist::query()->create([
                     'name' => $name,
                     'canonical_artist_id' => $canonicalArtist->id,
-                    'library_id' => $this->user->getKey(),
+                    'library_id' => $this->library->getKey(),
                     'source_artist_id' => $rekordboxArtist->ID,
                 ]);
 

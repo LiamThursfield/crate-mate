@@ -45,6 +45,20 @@ class RekordboxImportFull extends Command
             'library' => $this->argument('library'),
         ]);
 
+        $this->line('');
+
+        $this->info('Importing Histories');
+        $this->call('rekordbox:import-histories', [
+            'library' => $this->argument('library'),
+        ]);
+
+        $this->line('');
+
+        $this->info('Importing History Tracks');
+        $this->call('rekordbox:import-history-tracks', [
+            'library' => $this->argument('library'),
+        ]);
+
         return self::SUCCESS;
     }
 }

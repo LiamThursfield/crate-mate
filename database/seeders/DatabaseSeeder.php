@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
     {
         $user = User::factory()->withoutTwoFactor()->create([
             'name' => 'Test User',
+            'dj_name' => 'DJ Test User',
             'email' => 'test@example.com',
             'password' => Hash::make('password'),
         ]);
