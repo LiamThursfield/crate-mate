@@ -28,7 +28,7 @@ return new class extends Migration
 
             $table->timestamps();
 
-            // Ensure that each user can only have a single record for the given source / track id
+            // Ensure that each library can only have a single record for the given library / track id
             $table->unique(['library_id', 'source_track_id']);
         });
     }

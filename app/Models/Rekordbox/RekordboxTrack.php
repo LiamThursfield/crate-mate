@@ -2,7 +2,6 @@
 
 namespace App\Models\Rekordbox;
 
-use App\Models\LibraryArtist;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
@@ -13,7 +12,6 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property-read ?int $Length
  * @property-read ?string $Title
  * @property-read ?RekordboxKey $rekordboxKey
- * @property-read LibraryArtist $libraryArtist
  */
 class RekordboxTrack extends RekordboxModel
 {

@@ -22,6 +22,7 @@ use Illuminate\Support\Collection;
  * @property-read Carbon $updated_at
  * @property-read User $user
  * @property-read Collection<LibraryArtist> $artists
+ * @property-read Collection<LibraryHistory> $histories
  * @property-read Collection<LibraryTrack> $tracks
  */
 class Library extends Model
@@ -47,6 +48,16 @@ class Library extends Model
     public function artists(): HasMany
     {
         return $this->hasMany(LibraryArtist::class);
+    }
+
+    public function histories(): HasMany
+    {
+        return $this->hasMany(LibraryHistory::class);
+    }
+
+    public function historyTracks(): HasMany
+    {
+        return $this->hasMany(LibraryHistoryTrack::class);
     }
 
     public function tracks(): HasMany
