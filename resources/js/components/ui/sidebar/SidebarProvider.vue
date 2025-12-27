@@ -38,6 +38,11 @@ function setOpenMobile(value: boolean) {
   openMobile.value = value
 }
 
+function setOpenDesktopAndMobile() {
+    setOpen(true);
+    setOpenMobile(true);
+}
+
 // Helper to toggle the sidebar.
 function toggleSidebar() {
   return isMobile.value ? setOpenMobile(!openMobile.value) : setOpen(!open.value)
@@ -61,6 +66,7 @@ provideSidebarContext({
   isMobile,
   openMobile,
   setOpenMobile,
+  setOpenDesktopAndMobile,
   toggleSidebar,
 })
 </script>
