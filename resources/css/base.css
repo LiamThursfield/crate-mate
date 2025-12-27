@@ -1,0 +1,11 @@
+@layer base {
+    button,
+    [button] {
+        @apply cursor-pointer;
+        cursor: pointer !important;
+    }
+
+    button:disabled {
+        @apply cursor-default;
+    }
+}
