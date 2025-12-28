@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Carbon;
 
 /**
@@ -17,14 +17,14 @@ use Illuminate\Support\Carbon;
  * @property string $source_artist_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read CanonicalArtist|null $canonicalArtist
- * @property-read Library|null $library
+ * @property-read CanonicalArtist $canonicalArtist
+ * @property-read Library $library
  * @property-read Collection<int, LibraryTrack> $libraryTracks
  * @property-read int|null $library_tracks_count
  *
  * @method static Builder<static>|LibraryArtist newModelQuery()
  * @method static Builder<static>|LibraryArtist newQuery()
- * @method static Builder<static>|LibraryArtist ofUser(User $user)
+ * @method static Builder<static>|LibraryArtist ofUser(\App\Models\User $user)
  * @method static Builder<static>|LibraryArtist query()
  * @method static Builder<static>|LibraryArtist whereCanonicalArtistId($value)
  * @method static Builder<static>|LibraryArtist whereCreatedAt($value)
@@ -45,19 +45,19 @@ class LibraryArtist extends Model
         'source_artist_id',
     ];
 
-    public function canonicalArtist(): HasOne
+    public function canonicalArtist(): BelongsTo
     {
-        return $this->hasOne(CanonicalArtist::class, 'id', 'canonical_artist_id');
+        return $this->belongsTo(CanonicalArtist::class);
     }
 
-    public function library(): HasOne
+    public function library(): BelongsTo
     {
-        return $this->hasOne(Library::class);
+        return $this->belongsTo(Library::class);
     }
 
     public function libraryTracks(): HasMany
     {
-        return $this->hasMany(LibraryTrack::class, 'library_artist_id', 'id');
+        return $this->hasMany(LibraryTrack::class);
     }
 
     /**

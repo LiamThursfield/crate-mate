@@ -2,6 +2,13 @@
 import Pagination from '@/components/Pagination.vue';
 import { Input } from '@/components/ui/input';
 import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/select';
+import {
     Table,
     TableBody,
     TableCell,
@@ -10,22 +17,32 @@ import {
     TableRow,
 } from '@/components/ui/table';
 import myLibrary from '@/routes/my-library';
-import { LibraryArtistResource, PaginatedResource } from '@/types/resources';
+import {
+    LibraryArtistResource,
+    LibraryResource,
+    PaginatedResource,
+} from '@/types/resources';
 import { Head, router } from '@inertiajs/vue3';
 import { useDebounceFn } from '@vueuse/core';
 import { ref, watch } from 'vue';
 
 const props = defineProps<{
     artists: PaginatedResource<LibraryArtistResource>;
+    libraries: Array<LibraryResource>;
     search?: string;
+    library?: string;
 }>();
 
 const search = ref(props.search || '');
+const library = ref(props.library || '');
 
-const handleSearch = useDebounceFn((value: string) => {
+const handleSearch = useDebounceFn(() => {
     router.get(
         myLibrary.artist.index().url,
-        { search: value || null },
+        {
+            search: search.value || null,
+            library: library.value || null,
+        },
         {
             preserveState: true,
             preserveScroll: true,
@@ -34,8 +51,8 @@ const handleSearch = useDebounceFn((value: string) => {
     );
 }, 300);
 
-watch(search, (value) => {
-    handleSearch(value);
+watch([search, library], () => {
+    handleSearch();
 });
 
 defineOptions({
@@ -57,9 +74,26 @@ defineOptions({
     <div
         class="flex h-full flex-1 flex-col gap-4 overflow-hidden rounded-xl p-4"
     >
-        <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
             <div class="w-full max-w-sm">
                 <Input v-model="search" placeholder="Filter by name..." />
+            </div>
+            <div class="w-full max-w-sm">
+                <Select v-model="library">
+                    <SelectTrigger class="w-full">
+                        <SelectValue placeholder="All Libraries" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem :value="null"> All Libraries </SelectItem>
+                        <SelectItem
+                            v-for="lib in libraries"
+                            :key="lib.id"
+                            :value="lib.id.toString()"
+                        >
+                            {{ lib.source }} | {{ lib.name }}
+                        </SelectItem>
+                    </SelectContent>
+                </Select>
             </div>
         </div>
 
@@ -69,21 +103,26 @@ defineOptions({
                     <TableRow>
                         <TableHead>Artist Name</TableHead>
                         <TableHead>Master Artist Name</TableHead>
+                        <TableHead>Library</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     <TableRow v-if="artists.data.length === 0">
-                        <TableCell colspan="2" class="h-24 text-center">
+                        <TableCell colspan="3" class="h-24 text-center">
                             No artists found.
                         </TableCell>
                     </TableRow>
                     <TableRow v-for="artist in artists.data" :key="artist.id">
-                        <TableCell class="font-medium">{{
-                            artist.name
-                        }}</TableCell>
-                        <TableCell>{{
-                            artist.canonical_artist?.name || '-'
-                        }}</TableCell>
+                        <TableCell class="font-medium">
+                            {{ artist.name }}
+                        </TableCell>
+                        <TableCell>
+                            {{ artist.canonical_artist?.name || '-' }}
+                        </TableCell>
+                        <TableCell>
+                            {{ artist.library!.source }} |
+                            {{ artist.library!.name }}
+                        </TableCell>
                     </TableRow>
                 </TableBody>
             </Table>
