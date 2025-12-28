@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import PasswordController from '@/actions/App/Http/Controllers/Settings/PasswordController';
 import InputError from '@/components/InputError.vue';
-import AppLayout from '@/layouts/AppLayout.vue';
 import SettingsLayout from '@/layouts/settings/Layout.vue';
 import { edit } from '@/routes/user-password';
 import { Form, Head } from '@inertiajs/vue3';
@@ -12,19 +11,12 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
 defineOptions({
-    layout: (h: any, page: any) =>
-        h(
-            AppLayout,
-            {
-                breadcrumbs: [
-                    {
-                        title: 'Password settings',
-                        href: edit().url,
-                    },
-                ],
-            },
-            () => page,
-        ),
+    breadcrumbs: [
+        {
+            title: 'Password settings',
+            href: edit().url,
+        },
+    ],
 });
 </script>
 

@@ -1,3 +1,4 @@
+import AppLayout from '@/layouts/AppLayout.vue';
 import '../css/app.css';
 
 import { createInertiaApp } from '@inertiajs/vue3';
@@ -14,7 +15,24 @@ createInertiaApp({
         resolvePageComponent(
             `./pages/${name}.vue`,
             import.meta.glob<DefineComponent>('./pages/**/*.vue'),
-        ),
+        ).then((module) => {
+            const page = module.default;
+
+            // For all non-auth pages, use the AppLayout by default
+            // setting the breadcrumbs that may have been set via defineOptions
+            if (page.layout === undefined && !name.startsWith('auth/')) {
+                page.layout = (h: any, p: any) =>
+                    h(
+                        AppLayout,
+                        {
+                            breadcrumbs: page.breadcrumbs,
+                        },
+                        () => p,
+                    );
+            }
+
+            return page;
+        }),
     setup({ el, App, props, plugin }) {
         createApp({ render: () => h(App, props) })
             .use(plugin)

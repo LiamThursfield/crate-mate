@@ -1,23 +1,15 @@
 <script lang="ts" setup>
-import AppLayout from '@/layouts/AppLayout.vue';
 import { dashboard } from '@/routes';
 import { Head } from '@inertiajs/vue3';
 import PlaceholderPattern from '../components/PlaceholderPattern.vue';
 
 defineOptions({
-    layout: (h: any, page: any) =>
-        h(
-            AppLayout,
-            {
-                breadcrumbs: [
-                    {
-                        title: 'Dashboard',
-                        href: dashboard().url,
-                    },
-                ],
-            },
-            () => page,
-        ),
+    breadcrumbs: [
+        {
+            title: 'Dashboard',
+            href: dashboard().url,
+        },
+    ],
 });
 </script>
 
