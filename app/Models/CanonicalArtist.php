@@ -48,7 +48,7 @@ class CanonicalArtist extends Model
 
     public function isNotVerified(): bool
     {
-        return !$this->isVerified();
+        return ! $this->isVerified();
     }
 
     public function user(): HasOne
