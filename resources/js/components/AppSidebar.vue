@@ -40,7 +40,7 @@ const platformMenuItemSections: SidebarMenuItemSection[] = [
                     },
                     {
                         title: 'Tracks',
-                        url: '/dashboard',
+                        url: myLibrary.track.index().url,
                     },
                     {
                         title: 'Set Histories',
