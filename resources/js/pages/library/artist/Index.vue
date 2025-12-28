@@ -103,12 +103,13 @@ defineOptions({
                     <TableRow>
                         <TableHead>Artist Name</TableHead>
                         <TableHead>Master Artist Name</TableHead>
+                        <TableHead>Library Tracks</TableHead>
                         <TableHead>Library</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     <TableRow v-if="artists.data.length === 0">
-                        <TableCell colspan="3" class="h-24 text-center">
+                        <TableCell colspan="4" class="h-24 text-center">
                             No artists found.
                         </TableCell>
                     </TableRow>
@@ -118,6 +119,9 @@ defineOptions({
                         </TableCell>
                         <TableCell>
                             {{ artist.canonical_artist?.name || '-' }}
+                        </TableCell>
+                        <TableCell>
+                            {{ artist.library_track_count ?? '' }}
                         </TableCell>
                         <TableCell>
                             {{ artist.library!.source }} |
