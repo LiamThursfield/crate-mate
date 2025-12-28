@@ -15,15 +15,13 @@ Route::get('dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware(
-    [
-        'auth',
-        'verified',
-    ]
-)->prefix('my-library')
+Route::middleware(['auth', 'verified'])
+    ->prefix('my-library')
     ->name('my-library.')
-    ->group(function () {
-        Route::resource('artist', LibraryArtistController::class)->only(['index']);
-    });
+    ->group(
+        function () {
+            Route::resource('artist', LibraryArtistController::class)->only(['index']);
+        }
+    );
 
 require __DIR__.'/settings.php';
