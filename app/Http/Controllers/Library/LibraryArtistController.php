@@ -12,7 +12,6 @@ class LibraryArtistController extends Controller
 {
     public function index(LibraryArtistIndexRequest $request)
     {
-
         return Inertia::render('library/artist/Index', [
             'artists' => function () use ($request) {
                 return LibraryArtistResource::collection(
