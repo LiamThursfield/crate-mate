@@ -15,6 +15,7 @@ import {
     SidebarRail,
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
+import myLibrary from '@/routes/my-library';
 import { SidebarMenuItemSection } from '@/types';
 import { Link } from '@inertiajs/vue3';
 import AppLogo from './AppLogo.vue';
@@ -30,13 +31,15 @@ const platformMenuItemSections: SidebarMenuItemSection[] = [
             {
                 title: 'My Library',
                 icon: 'Library',
+                isActive: true,
                 items: [
                     {
-                        title: 'Tracks',
-                        url: '/dashboard',
+                        title: 'Artists',
+                        url: myLibrary.artist.index().url,
+                        isActive: true,
                     },
                     {
-                        title: 'Artists',
+                        title: 'Tracks',
                         url: '/dashboard',
                     },
                     {
@@ -50,11 +53,11 @@ const platformMenuItemSections: SidebarMenuItemSection[] = [
                 icon: 'Crown',
                 items: [
                     {
-                        title: 'Tracks',
+                        title: 'Artists',
                         url: '/dashboard',
                     },
                     {
-                        title: 'Artists',
+                        title: 'Tracks',
                         url: '/dashboard',
                     },
                 ],
