@@ -9,6 +9,7 @@ class LibraryArtistIndexRequest extends PaginatedRequest
     public function rules(): array
     {
         return array_merge(parent::rules(), [
+            'library' => 'nullable|int|exists:libraries,id',
             'search' => 'nullable|string',
         ]);
     }
