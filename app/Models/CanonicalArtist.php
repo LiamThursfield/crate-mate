@@ -41,6 +41,16 @@ class CanonicalArtist extends Model
         'verified_at' => 'datetime',
     ];
 
+    public function isVerified(): bool
+    {
+        return $this->verified_at !== null;
+    }
+
+    public function isNotVerified(): bool
+    {
+        return !$this->isVerified();
+    }
+
     public function user(): HasOne
     {
         return $this->hasOne(User::class, 'id', 'user_id');
