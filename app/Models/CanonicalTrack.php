@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -23,6 +22,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property-read Collection<int, \App\Models\LibraryTrack> $libraryTracks
  * @property-read int|null $library_tracks_count
  * @property-read \App\Models\User|null $user
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CanonicalTrack newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CanonicalTrack newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CanonicalTrack query()
@@ -36,6 +36,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CanonicalTrack whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CanonicalTrack whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CanonicalTrack whereVerifiedAt($value)
+ *
  * @mixin \Eloquent
  */
 class CanonicalTrack extends Model

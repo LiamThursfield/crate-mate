@@ -3,14 +3,12 @@
 namespace App\Models;
 
 use App\Enums\LibrarySource;
-use Carbon\Carbon;
 use Database\Factories\LibraryFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Collection;
 
 /**
  * @property int $id
@@ -29,6 +27,7 @@ use Illuminate\Support\Collection;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\LibraryTrack> $tracks
  * @property-read int|null $tracks_count
  * @property-read \App\Models\User $user
+ *
  * @method static \Database\Factories\LibraryFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Library newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Library newQuery()
@@ -43,6 +42,7 @@ use Illuminate\Support\Collection;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Library whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Library withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Library withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Library extends Model

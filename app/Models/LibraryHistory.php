@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -14,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $source_history_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryHistory newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryHistory newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryHistory query()
@@ -25,6 +25,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryHistory whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryHistory whereSourceHistoryId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryHistory whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class LibraryHistory extends Model

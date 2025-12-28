@@ -15,6 +15,7 @@ namespace App\Models\Rekordbox;
  * @property int|null $rb_local_usn
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|RekordboxArtist newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|RekordboxArtist newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|RekordboxArtist query()
@@ -30,6 +31,7 @@ namespace App\Models\Rekordbox;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|RekordboxArtist whereUUID($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|RekordboxArtist whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|RekordboxArtist whereUsn($value)
+ *
  * @mixin \Eloquent
  */
 class RekordboxArtist extends RekordboxModel

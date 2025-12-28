@@ -2,11 +2,9 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Support\Collection;
 
 /**
  * @property int $id
@@ -20,6 +18,7 @@ use Illuminate\Support\Collection;
  * @property-read \App\Models\Library|null $library
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\LibraryTrack> $libraryTracks
  * @property-read int|null $library_tracks_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryArtist newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryArtist newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryArtist query()
@@ -30,6 +29,7 @@ use Illuminate\Support\Collection;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryArtist whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryArtist whereSourceArtistId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryArtist whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class LibraryArtist extends Model

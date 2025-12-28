@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property \Illuminate\Support\Carbon $updated_at
  * @property-read Collection<int, \App\Models\Rekordbox\RekordboxSongHistory> $rekordboxSongHistories
  * @property-read int|null $rekordbox_song_histories_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|RekordboxHistory newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|RekordboxHistory newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|RekordboxHistory query()
@@ -41,6 +42,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|RekordboxHistory whereUUID($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|RekordboxHistory whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|RekordboxHistory whereUsn($value)
+ *
  * @mixin \Eloquent
  */
 class RekordboxHistory extends RekordboxModel

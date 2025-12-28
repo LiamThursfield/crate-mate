@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -22,6 +21,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property-read \App\Models\CanonicalTrack|null $canonicalTrack
  * @property-read \App\Models\Library|null $library
  * @property-read \App\Models\LibraryArtist|null $libraryArtist
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryTrack newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryTrack newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryTrack query()
@@ -36,6 +36,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryTrack whereSourceTrackId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryTrack whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryTrack whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class LibraryTrack extends Model

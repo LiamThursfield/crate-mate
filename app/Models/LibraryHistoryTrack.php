@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -15,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $source_history_track_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryHistoryTrack newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryHistoryTrack newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryHistoryTrack query()
@@ -27,6 +27,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryHistoryTrack whereSourceHistoryTrackId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryHistoryTrack whereTrackNo($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryHistoryTrack whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class LibraryHistoryTrack extends Model

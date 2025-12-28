@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
  * @property-read \App\Models\Rekordbox\RekordboxHistory|null $rekordboxHistory
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|RekordboxSongHistory newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|RekordboxSongHistory newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|RekordboxSongHistory query()
@@ -35,6 +36,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|RekordboxSongHistory whereUUID($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|RekordboxSongHistory whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|RekordboxSongHistory whereUsn($value)
+ *
  * @mixin \Eloquent
  */
 class RekordboxSongHistory extends RekordboxModel

@@ -2,11 +2,9 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Support\Collection;
 
 /**
  * @property int $id
@@ -18,6 +16,7 @@ use Illuminate\Support\Collection;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\LibraryArtist> $libraryArtists
  * @property-read int|null $library_artists_count
  * @property-read \App\Models\User|null $user
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CanonicalArtist newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CanonicalArtist newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CanonicalArtist query()
@@ -27,6 +26,7 @@ use Illuminate\Support\Collection;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CanonicalArtist whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CanonicalArtist whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CanonicalArtist whereVerifiedAt($value)
+ *
  * @mixin \Eloquent
  */
 class CanonicalArtist extends Model

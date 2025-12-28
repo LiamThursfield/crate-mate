@@ -84,6 +84,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
  * @property-read \App\Models\Rekordbox\RekordboxKey|null $rekordboxKey
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|RekordboxTrack newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|RekordboxTrack newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|RekordboxTrack query()
@@ -165,6 +166,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|RekordboxTrack whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|RekordboxTrack whereUsn($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|RekordboxTrack whereVideoAssociate($value)
+ *
  * @mixin \Eloquent
  */
 class RekordboxTrack extends RekordboxModel
