@@ -1,7 +1,15 @@
-import LibraryArtistController from './LibraryArtistController'
+import LibraryArtistController from './LibraryArtistController';
+import LibraryTrackController from './LibraryTrackController';
 
 const Library = {
-    LibraryArtistController: Object.assign(LibraryArtistController, LibraryArtistController),
-}
+    LibraryArtistController: Object.assign(
+        LibraryArtistController,
+        LibraryArtistController,
+    ),
+    LibraryTrackController: Object.assign(
+        LibraryTrackController,
+        LibraryTrackController,
+    ),
+};
 
-export default Library
+export default Library;

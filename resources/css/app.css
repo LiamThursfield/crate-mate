@@ -182,7 +182,7 @@
 
     .scrollbar-stylized {
         scrollbar-width: thin;
-        scrollbar-color: var(--border)  transparent;
+        scrollbar-color: var(--border) transparent;
     }
 
     .scrollbar-stylized::-webkit-scrollbar {
@@ -195,7 +195,7 @@
     }
 
     .scrollbar-stylized::-webkit-scrollbar-thumb {
-        background-color: var(--border)  transparent;
+        background-color: var(--border) transparent;
         border-radius: 20px;
     }
 
