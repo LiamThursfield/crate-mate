@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @property int $id
@@ -20,23 +20,25 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\CanonicalTrack|null $canonicalTrack
- * @property-read \App\Models\Library|null $library
+ * @property-read \App\Models\Library $library
  * @property-read \App\Models\LibraryArtist|null $libraryArtist
  *
- * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryTrack newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryTrack newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryTrack query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryTrack whereBpm($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryTrack whereCanonicalTrackId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryTrack whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryTrack whereDuration($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryTrack whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryTrack whereKey($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryTrack whereLibraryArtistId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryTrack whereLibraryId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryTrack whereSourceTrackId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryTrack whereTitle($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryTrack whereUpdatedAt($value)
+ * @method static \Database\Factories\LibraryTrackFactory factory($count = null, $state = [])
+ * @method static Builder<static>|LibraryTrack newModelQuery()
+ * @method static Builder<static>|LibraryTrack newQuery()
+ * @method static Builder<static>|LibraryTrack ofUser(\App\Models\User $user)
+ * @method static Builder<static>|LibraryTrack query()
+ * @method static Builder<static>|LibraryTrack whereBpm($value)
+ * @method static Builder<static>|LibraryTrack whereCanonicalTrackId($value)
+ * @method static Builder<static>|LibraryTrack whereCreatedAt($value)
+ * @method static Builder<static>|LibraryTrack whereDuration($value)
+ * @method static Builder<static>|LibraryTrack whereId($value)
+ * @method static Builder<static>|LibraryTrack whereKey($value)
+ * @method static Builder<static>|LibraryTrack whereLibraryArtistId($value)
+ * @method static Builder<static>|LibraryTrack whereLibraryId($value)
+ * @method static Builder<static>|LibraryTrack whereSourceTrackId($value)
+ * @method static Builder<static>|LibraryTrack whereTitle($value)
+ * @method static Builder<static>|LibraryTrack whereUpdatedAt($value)
  *
  * @mixin \Eloquent
  */
@@ -57,16 +59,28 @@ class LibraryTrack extends Model
 
     public function canonicalTrack(): BelongsTo
     {
-        return $this->belongsTo(CanonicalTrack::class, 'id', 'canonical_track_id');
+        return $this->belongsTo(CanonicalTrack::class);
     }
 
-    public function library(): HasOne
+    public function library(): BelongsTo
     {
-        return $this->hasOne(Library::class);
+        return $this->belongsTo(Library::class);
     }
 
     public function libraryArtist(): BelongsTo
     {
-        return $this->belongsTo(LibraryArtist::class, 'id', 'library_artist_id');
+        return $this->belongsTo(LibraryArtist::class);
+    }
+
+    /**
+     * Scope the query to only include artists from the given user's libraries.
+     */
+    public function scopeOfUser(Builder $query, User $user): void
+    {
+        $query->whereIn('library_id', function ($subquery) use ($user) {
+            $subquery->select('id')
+                ->from('libraries')
+                ->where('user_id', $user->id);
+        });
     }
 }

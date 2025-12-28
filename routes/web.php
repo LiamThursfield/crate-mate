@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Library\LibraryArtistController;
+use App\Http\Controllers\Library\LibraryTrackController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
@@ -21,6 +22,7 @@ Route::middleware(['auth', 'verified'])
     ->group(
         function () {
             Route::resource('artist', LibraryArtistController::class)->only(['index']);
+            Route::resource('track', LibraryTrackController::class)->only(['index']);
         }
     );
 
