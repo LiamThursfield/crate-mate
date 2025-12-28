@@ -2,18 +2,31 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property-read int $id
+ * @property int $id
  * @property string $name
- * @property Carbon $date
+ * @property \Illuminate\Support\Carbon $date
  * @property bool $include_in_stats
  * @property int $library_id
  * @property string $source_history_id
- * @property-read Carbon $created_at
- * @property-read Carbon $updated_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryHistory newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryHistory newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryHistory query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryHistory whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryHistory whereDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryHistory whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryHistory whereIncludeInStats($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryHistory whereLibraryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryHistory whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryHistory whereSourceHistoryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryHistory whereUpdatedAt($value)
+ *
+ * @mixin \Eloquent
  */
 class LibraryHistory extends Model
 {

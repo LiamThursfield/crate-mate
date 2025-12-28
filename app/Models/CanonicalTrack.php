@@ -2,27 +2,42 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
- * @property-read int $id
+ * @property int $id
  * @property string $title
- * @property float $bpm
+ * @property numeric|null $bpm
  * @property int $duration
- * @property string $key
- * @property ?int $canonical_artist_id
+ * @property string|null $key
+ * @property int|null $canonical_artist_id
  * @property int $user_id
- * @property ?Carbon $verified_at
- * @property-read Carbon $created_at
- * @property-read Carbon $updated_at
- * @property-read User $user
- * @property-read Collection<LibraryTrack> $libraryTracks
- * @property-read ?int $library_tracks_count
- * @property-read ?CanonicalArtist $canonicalArtist
+ * @property \Illuminate\Support\Carbon|null $verified_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\CanonicalArtist|null $canonicalArtist
+ * @property-read Collection<int, \App\Models\LibraryTrack> $libraryTracks
+ * @property-read int|null $library_tracks_count
+ * @property-read \App\Models\User|null $user
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CanonicalTrack newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CanonicalTrack newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CanonicalTrack query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CanonicalTrack whereBpm($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CanonicalTrack whereCanonicalArtistId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CanonicalTrack whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CanonicalTrack whereDuration($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CanonicalTrack whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CanonicalTrack whereKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CanonicalTrack whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CanonicalTrack whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CanonicalTrack whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CanonicalTrack whereVerifiedAt($value)
+ *
+ * @mixin \Eloquent
  */
 class CanonicalTrack extends Model
 {

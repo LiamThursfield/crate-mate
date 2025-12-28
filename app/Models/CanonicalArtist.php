@@ -2,21 +2,32 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Support\Collection;
 
 /**
- * @property-read int $id
+ * @property int $id
  * @property string $name
  * @property int $user_id
- * @property ?Carbon $verified_at
- * @property-read Carbon $created_at
- * @property Carbon $updated_at
- * @property-read User $user
- * @property-read Collection<LibraryArtist> $libraryArtists
+ * @property \Illuminate\Support\Carbon|null $verified_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\LibraryArtist> $libraryArtists
+ * @property-read int|null $library_artists_count
+ * @property-read \App\Models\User|null $user
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CanonicalArtist newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CanonicalArtist newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CanonicalArtist query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CanonicalArtist whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CanonicalArtist whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CanonicalArtist whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CanonicalArtist whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CanonicalArtist whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CanonicalArtist whereVerifiedAt($value)
+ *
+ * @mixin \Eloquent
  */
 class CanonicalArtist extends Model
 {
