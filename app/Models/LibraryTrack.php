@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Enums\LibrarySource;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -16,11 +15,11 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property int $duration
  * @property string $key
  * @property ?int $library_artist_id
- * @property int $user_id
- * @property LibrarySource $source
+ * @property int $library_id
  * @property string $source_track_id
  * @property-read Carbon $created_at
  * @property-read Carbon $updated_at
+ * @property-read CanonicalTrack $canonicalTrack
  * @property-read Library $library
  * @property-read ?LibraryArtist $libraryArtist
  */
@@ -36,6 +35,11 @@ class LibraryTrack extends Model
         'source_track_id',
         'title',
     ];
+
+    public function canonicalTrack(): BelongsTo
+    {
+        return $this->belongsTo(CanonicalTrack::class, 'id', 'canonical_track_id');
+    }
 
     public function library(): HasOne
     {

@@ -16,11 +16,12 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property string $key
  * @property ?int $canonical_artist_id
  * @property int $user_id
- * @property Carbon $verified_at
+ * @property ?Carbon $verified_at
  * @property-read Carbon $created_at
  * @property-read Carbon $updated_at
  * @property-read User $user
  * @property-read Collection<LibraryTrack> $libraryTracks
+ * @property-read ?int $library_tracks_count
  * @property-read ?CanonicalArtist $canonicalArtist
  */
 class CanonicalTrack extends Model

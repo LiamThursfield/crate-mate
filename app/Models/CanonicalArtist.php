@@ -12,7 +12,7 @@ use Illuminate\Support\Collection;
  * @property-read int $id
  * @property string $name
  * @property int $user_id
- * @property Carbon $verified_at
+ * @property ?Carbon $verified_at
  * @property-read Carbon $created_at
  * @property Carbon $updated_at
  * @property-read User $user
