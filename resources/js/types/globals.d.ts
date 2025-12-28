@@ -23,4 +23,8 @@ declare module 'vue' {
         $page: Page;
         $headManager: ReturnType<typeof createHeadManager>;
     }
+
+    interface ComponentCustomOptions {
+        breadcrumbs?: import('./index').BreadcrumbItem[];
+    }
 }

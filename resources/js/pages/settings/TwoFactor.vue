@@ -5,7 +5,6 @@ import TwoFactorSetupModal from '@/components/TwoFactorSetupModal.vue';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { useTwoFactorAuth } from '@/composables/useTwoFactorAuth';
-import AppLayout from '@/layouts/AppLayout.vue';
 import SettingsLayout from '@/layouts/settings/Layout.vue';
 import { disable, enable, show } from '@/routes/two-factor';
 import { Form, Head } from '@inertiajs/vue3';
@@ -23,19 +22,12 @@ withDefaults(defineProps<Props>(), {
 });
 
 defineOptions({
-    layout: (h: any, page: any) =>
-        h(
-            AppLayout,
-            {
-                breadcrumbs: [
-                    {
-                        title: 'Two-Factor Authentication',
-                        href: show.url(),
-                    },
-                ],
-            },
-            () => page,
-        ),
+    breadcrumbs: [
+        {
+            title: 'Two-Factor Authentication',
+            href: show.url(),
+        },
+    ],
 });
 
 const { hasSetupData, clearTwoFactorAuthData } = useTwoFactorAuth();

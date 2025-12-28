@@ -10,7 +10,6 @@ import InputError from '@/components/InputError.vue';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import AppLayout from '@/layouts/AppLayout.vue';
 import SettingsLayout from '@/layouts/settings/Layout.vue';
 
 interface Props {
@@ -21,19 +20,12 @@ interface Props {
 defineProps<Props>();
 
 defineOptions({
-    layout: (h: any, page: any) =>
-        h(
-            AppLayout,
-            {
-                breadcrumbs: [
-                    {
-                        title: 'Profile settings',
-                        href: edit().url,
-                    },
-                ],
-            },
-            () => page,
-        ),
+    breadcrumbs: [
+        {
+            title: 'Profile settings',
+            href: edit().url,
+        },
+    ],
 });
 
 const page = usePage();
