@@ -8,20 +8,35 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
- * @property-read int $id
- * @property int $canonical_track_id
+ * @property int $id
+ * @property int|null $canonical_track_id
  * @property string $title
- * @property float $bpm
+ * @property numeric|null $bpm
  * @property int $duration
- * @property string $key
- * @property ?int $library_artist_id
+ * @property string|null $key
+ * @property int|null $library_artist_id
  * @property int $library_id
  * @property string $source_track_id
- * @property-read Carbon $created_at
- * @property-read Carbon $updated_at
- * @property-read CanonicalTrack $canonicalTrack
- * @property-read Library $library
- * @property-read ?LibraryArtist $libraryArtist
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\CanonicalTrack|null $canonicalTrack
+ * @property-read \App\Models\Library|null $library
+ * @property-read \App\Models\LibraryArtist|null $libraryArtist
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryTrack newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryTrack newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryTrack query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryTrack whereBpm($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryTrack whereCanonicalTrackId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryTrack whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryTrack whereDuration($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryTrack whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryTrack whereKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryTrack whereLibraryArtistId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryTrack whereLibraryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryTrack whereSourceTrackId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryTrack whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|LibraryTrack whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class LibraryTrack extends Model
 {
