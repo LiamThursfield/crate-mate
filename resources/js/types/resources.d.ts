@@ -37,6 +37,7 @@ export interface LibraryArtistResource {
     canonical_artist?: CanonicalArtistResource;
     library_id: string;
     library?: LibraryResource;
+    library_track_count?: number | null;
 }
 
 export interface CanonicalArtistResource {

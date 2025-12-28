@@ -22,6 +22,7 @@ class LibraryArtistController extends Controller
                 return LibraryArtistResource::collection(
                     LibraryArtist::ofUser($request->user())
                         ->with(['canonicalArtist', 'library'])
+                        ->withCount(['libraryTracks'])
                         ->when($search !== null, function ($query) use ($search) {
                             $query->where('name', 'like', "%{$search}%");
                         })

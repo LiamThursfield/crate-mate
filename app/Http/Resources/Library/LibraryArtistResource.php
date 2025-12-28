@@ -30,6 +30,8 @@ class LibraryArtistResource extends JsonResource
 
             'library_id' => $artist->library_id,
             'library' => LibraryResource::make($this->whenLoaded('library')),
+
+            'library_track_count' => $artist->library_tracks_count,
         ];
     }
 }
