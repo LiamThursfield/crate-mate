@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { Button } from '@/components/ui/button';
 import type { PaginationMetaLink } from '@/types/resources';
-import { Link } from '@inertiajs/vue3';
 
 defineProps<{
     links: PaginationMetaLink[];
@@ -12,14 +11,12 @@ defineProps<{
     <div class="flex flex-wrap items-center justify-center gap-1">
         <template v-for="(link, i) in links" :key="i">
             <Button
-                v-if="link.url"
-                as-child
+                v-if="link.page != null"
                 :variant="link.active ? 'default' : 'outline'"
                 size="sm"
+                @click="$emit('pageChange', link.page)"
             >
-                <Link :href="link.url" preserve-scroll preserve-state>
-                    <span v-html="link.label" />
-                </Link>
+                <span v-html="link.label" />
             </Button>
             <Button
                 v-else
