@@ -31,10 +31,12 @@ const props = defineProps<{
     libraries: Array<LibraryResource>;
     search?: string;
     library?: string;
+    page?: number;
 }>();
 
 const search = ref(props.search || '');
 const library = ref(props.library || '');
+const page = ref<number | undefined>(props.page || undefined);
 
 const handleSearch = useDebounceFn(() => {
     router.get(
@@ -42,6 +44,7 @@ const handleSearch = useDebounceFn(() => {
         {
             search: search.value || null,
             library: library.value || null,
+            page: page.value || undefined,
         },
         {
             preserveState: true,
@@ -52,8 +55,17 @@ const handleSearch = useDebounceFn(() => {
 }, 300);
 
 watch([search, library], () => {
+    page.value = 1;
     handleSearch();
 });
+
+watch([page], () => {
+    handleSearch();
+});
+
+const onPageChange = (p: number) => {
+    page.value = p;
+};
 
 defineOptions({
     breadcrumbs: [
@@ -133,7 +145,10 @@ defineOptions({
         </div>
 
         <div class="mt-4 flex justify-end">
-            <Pagination :links="tracks.meta.links" />
+            <Pagination
+                :links="tracks.meta.links"
+                @page-change="onPageChange"
+            />
         </div>
     </div>
 </template>
