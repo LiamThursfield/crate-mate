@@ -9,7 +9,6 @@ trait HasDuration
 {
     /**
      * Get the duration formatted as minutes and seconds (e.g., "3:45").
-     * @return string
      */
     public function getDurationAsMinutesAndSeconds(): string
     {
