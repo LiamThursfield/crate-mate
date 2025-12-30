@@ -113,24 +113,38 @@ defineOptions({
             <Table>
                 <TableHeader>
                     <TableRow>
-                        <TableHead>Track Title</TableHead>
-                        <TableHead>Track Artist</TableHead>
+                        <TableHead>Title</TableHead>
+                        <TableHead>Artist</TableHead>
+                        <TableHead>Duration</TableHead>
+                        <TableHead>BPM</TableHead>
+                        <TableHead>Key</TableHead>
                         <TableHead>Master Track Title</TableHead>
                         <TableHead>Library</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     <TableRow v-if="tracks.data.length === 0">
-                        <TableCell colspan="4" class="h-24 text-center">
-                            No artists found.
+                        <TableCell colspan="7" class="h-24 text-center">
+                            No tracks found.
                         </TableCell>
                     </TableRow>
                     <TableRow v-for="artist in tracks.data" :key="artist.id">
                         <TableCell class="font-medium">
                             {{ artist.title }}
                         </TableCell>
-                        <TableCell class="font-medium">
+                        <TableCell>
                             {{ artist.library_artist!.name }}
+                        </TableCell>
+                        <TableCell class="text-right">
+                            {{ artist.duration_formatted }}
+                        </TableCell>
+                        <TableCell class="text-right">
+                            {{
+                                artist.bpm != null ? Math.round(artist.bpm) : ''
+                            }}
+                        </TableCell>
+                        <TableCell class="text-right">
+                            {{ artist.key }}
                         </TableCell>
                         <TableCell>
                             {{ artist.canonical_track?.title || '-' }}
