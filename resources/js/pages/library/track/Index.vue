@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import Pagination from '@/components/Pagination.vue';
+import { Input } from '@/components/ui/input';
 import {
     Select,
     SelectContent,
@@ -24,7 +25,6 @@ import {
 import { Head, router } from '@inertiajs/vue3';
 import { useDebounceFn, watchDeep } from '@vueuse/core';
 import { ref, watch } from 'vue';
-import { Input } from '@/components/ui/input';
 
 const props = defineProps<{
     errors: Record<string, Array<string>>;
@@ -105,7 +105,7 @@ defineOptions({
         class="flex h-full flex-1 flex-col gap-4 overflow-hidden rounded-xl p-4"
     >
         <div class="grid grid-cols-12 items-center gap-4">
-            <div class="col-span-6 sm:col-span-5 w-full">
+            <div class="col-span-6 w-full sm:col-span-5">
                 <Input
                     :aria-invalid="filterHasError('search')"
                     placeholder="Filter by name..."
@@ -113,7 +113,7 @@ defineOptions({
                 />
             </div>
 
-            <div class="col-span-6 sm:col-span-3  w-full">
+            <div class="col-span-6 w-full sm:col-span-3">
                 <Select
                     :aria-invalid="filterHasError('library')"
                     v-model="filters.library"
@@ -134,11 +134,15 @@ defineOptions({
                 </Select>
             </div>
 
-            <div class="col-span-6 sm:col-span-2 w-full">
+            <div class="col-span-6 w-full sm:col-span-2">
                 <Input
                     :aria-invalid="filterHasError('bpm_min')"
                     :min="1"
-                    :max="isFilterSet('bpm_max') ? parseInt(filters.bpm_max) - 1 : null"
+                    :max="
+                        isFilterSet('bpm_max')
+                            ? parseInt(filters.bpm_max) - 1
+                            : null
+                    "
                     placeholder="Min BPM"
                     step="1"
                     type="number"
@@ -146,10 +150,14 @@ defineOptions({
                 />
             </div>
 
-            <div class="col-span-6 sm:col-span-2  w-full">
+            <div class="col-span-6 w-full sm:col-span-2">
                 <Input
                     :aria-invalid="filterHasError('bpm_max')"
-                    :min="isFilterSet('bpm_max') ? parseInt(filters.bpm_min) + 1 : 1"
+                    :min="
+                        isFilterSet('bpm_max')
+                            ? parseInt(filters.bpm_min) + 1
+                            : 1
+                    "
                     placeholder="Max BPM"
                     step="1"
                     type="number"
