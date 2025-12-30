@@ -82,11 +82,4 @@ show.form = showForm
 
 const ConfirmedPasswordStatusController = { show }
 
-export default ConfirmedPasswordStatusController',
-})
-
-show.form = showForm
-
-const ConfirmedPasswordStatusController = { show }
-
 export default ConfirmedPasswordStatusController
