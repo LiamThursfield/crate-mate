@@ -18,6 +18,8 @@ class LibraryTrackController extends Controller
             'tracks' => function () use ($request) {
                 $search = $request->input('search');
                 $libraryId = $request->input('library');
+                $bpmMin = $request->input('bpm_min');
+                $bpmMax = $request->input('bpm_max');
 
                 return LibraryTrackResource::collection(
                     LibraryTrack::ofUser($request->user())
@@ -27,6 +29,12 @@ class LibraryTrackController extends Controller
                         })
                         ->when($libraryId !== null, function ($query) use ($libraryId) {
                             $query->where('library_id', $libraryId);
+                        })
+                        ->when($bpmMin !== null, function ($query) use ($bpmMin) {
+                            $query->where('bpm', '>=', $bpmMin);
+                        })
+                        ->when($bpmMax !== null, function ($query) use ($bpmMax) {
+                            $query->where('bpm', '<=', $bpmMax);
                         })
                         ->orderBy($request->getOrderBy(), $request->getOrderDirection())
                         ->paginate($request->getPerPage())
@@ -44,6 +52,8 @@ class LibraryTrackController extends Controller
             },
             'search' => $request->input('search'),
             'library' => $request->input('library'),
+            'bpm_min' => $request->input('bpm_min'),
+            'bpm_max' => $request->input('bpm_max'),
         ]);
     }
 }
