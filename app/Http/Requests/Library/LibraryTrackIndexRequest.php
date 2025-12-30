@@ -29,7 +29,6 @@ class LibraryTrackIndexRequest extends PaginatedRequest
     /**
      * Add additional validation for BPM
      *
-     * @param $validator
      * @return void
      */
     public function withValidator($validator)
