@@ -18,7 +18,8 @@ export interface LibraryTrackResource {
     id: string;
     created: string;
     bpm: number | null;
-    duration: number | null;
+    duration: number;
+    duration_formatted: number;
     key: string | null;
     title: string;
     canonical_artist_id: number | null;
@@ -54,7 +55,8 @@ export interface CanonicalTrackResource {
     id: number;
     created_at: string;
     bpm: number | null;
-    duration: number | null;
+    duration: number;
+    duration_formatted: number;
     is_verified: boolean;
     key: string | null;
     title: string;
