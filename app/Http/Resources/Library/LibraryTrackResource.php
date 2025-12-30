@@ -25,6 +25,7 @@ class LibraryTrackResource extends JsonResource
 
             'bpm' => $track->bpm,
             'duration' => $track->duration,
+            'duration_formatted' => $track->getDurationAsMinutesAndSeconds(),
             'key' => $track->key,
             'title' => $track->title,
 

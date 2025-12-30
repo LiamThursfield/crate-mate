@@ -26,6 +26,7 @@ class CanonicalTrackResource extends JsonResource
 
             'bpm' => $track->bpm,
             'duration' => $track->duration,
+            'duration_formatted' => $track->getDurationAsMinutesAndSeconds(),
             'is_verified' => $track->verified_at !== null,
             'key' => $track->key,
             'title' => $track->title,
